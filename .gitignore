@@ -38,3 +38,7 @@ npm-debug.log*
 
 # Task runner
 .task-runner/
+
+# Superpowers (plans, specs — local only)
+docs/superpowers/
+.superpowers/

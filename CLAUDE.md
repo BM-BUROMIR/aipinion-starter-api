@@ -1,57 +1,46 @@
-# aipinion-starter-api — CLAUDE.md
+# CLAUDE.md — aipinion-starter-api
 
-## Project Overview
+## Обзор
 
-Public starter template for API-only services in the aipinion.ru ecosystem.
-Hono + TypeScript running on Node.js 20. Deploy via Coolify.
+Стартер-шаблон для API-сервисов aipinion.ru. Hono + TypeScript, Node.js 20.
 
-## Commands
+## Tech Stack
+
+Node.js 20, Hono, JWT RS256 JWKS (jose, auth.aipinion.ru), Vitest + Playwright.
+
+## Структура
+
+| Файл                             | Назначение                       |
+| -------------------------------- | -------------------------------- |
+| `src/index.ts`                   | Hono app, роуты, сервер          |
+| `src/config.ts`                  | Env vars                         |
+| `src/middleware/require-auth.ts` | JWT через JWKS (jose)            |
+| `src/routes/health.ts`           | GET /health                      |
+| `src/routes/example.ts`          | CRUD /api/examples               |
+| `src/services/example.ts`        | In-memory store (заменить на БД) |
+| `src/types/index.ts`             | TypeScript-интерфейсы            |
+
+## Команды
 
 ```bash
-npm run dev              # Development with hot reload (tsx watch)
-npm run build            # TypeScript compilation
-npm run start            # Production server (requires .env)
-npm run lint             # ESLint check
-npm run lint:fix         # ESLint auto-fix
-npm run format           # Prettier format all files
-npm run format:check     # Prettier check (CI)
-npm run test             # Run unit + integration tests (vitest)
-npm run test:watch       # Run tests in watch mode
-npm run test:coverage    # Run tests with 100% coverage threshold
-npm run test:e2e         # Run E2E tests (Playwright request context)
+npm run dev / build / start / lint / lint:fix / format / format:check
+npm run test / test:watch / test:coverage    # Vitest (100%)
+npm run test:e2e                             # Playwright
 ```
 
-## Quality Gates
+## API
 
-Pre-commit (lint-staged): ESLint --fix + Prettier --write
-Pre-push: lint + format:check + build + test:coverage + test:e2e
+| Метод               | Путь                  | Auth | Описание     |
+| ------------------- | --------------------- | ---- | ------------ |
+| GET                 | `/health`             | Нет  | Health check |
+| GET/POST/PUT/DELETE | `/api/examples[/:id]` | JWT  | CRUD         |
 
-Coverage threshold: **100%** (statements, branches, functions, lines).
-Pushing is blocked if any check fails.
+## Зависимости
 
-## Key Files
+- **auth/** — JWT через JWKS `https://auth.aipinion.ru/.well-known/jwks.json`
 
-| File                             | Purpose                                    |
-| -------------------------------- | ------------------------------------------ |
-| `src/index.ts`                   | Hono app setup, route registration, server |
-| `src/config.ts`                  | Environment variable loading               |
-| `src/middleware/require-auth.ts` | JWT verification via JWKS (jose)           |
-| `src/routes/health.ts`           | GET /health endpoint                       |
-| `src/routes/example.ts`          | CRUD routes for /api/examples              |
-| `src/services/example.ts`        | Business logic (in-memory store)           |
-| `src/types/index.ts`             | TypeScript interfaces                      |
+## Правила
 
-## Architecture
-
-- **JWT RS256 verification**: Tokens verified via JWKS from auth.aipinion.ru
-- **In-memory store**: Example CRUD — replace with your database
-- **Hono**: Lightweight web framework with built-in TypeScript support
-- **Three-layer tests**: Unit (vitest), Integration (vitest), E2E (Playwright)
-
-## Do NOT
-
-- Push without passing all quality gates (`--no-verify` is forbidden)
-- Commit `.env`, `.env.prod`, `.coolify.env`
-- Add `any` to TypeScript (ESLint: error)
-- Lower coverage threshold below 100%
-- Delete tests
+- In-memory store — пример, заменить на БД
+- Три уровня тестов: unit, integration (vitest), E2E (Playwright)
+- Публичный шаблон — без секретов
