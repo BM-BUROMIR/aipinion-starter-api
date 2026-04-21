@@ -1,54 +1,23 @@
-# AGENTS.md — aipinion-starter-api
+---
+project: aipinion-starter-api
+load_strategy: alpha
+tracker: 'github:BM-BUROMIR/aipinion-starter-api'
+---
 
-## Project context
+# aipinion/starter-api
 
-Публичный стартер-шаблон для API-сервисов экосистемы aipinion.ru. Hono + TypeScript на Node.js 20. Репозиторий public.
+## Обзор, стек, структура
 
-## Architecture decisions
+@./rules/overview.md
 
-- **ADR-1: Hono over Express** — built-in TypeScript, Web Standards (Request/Response), portable to edge
-- **ADR-2: jose для JWT** — zero dependencies, поддержка всех key types, Node.js + edge
-- **ADR-3: In-memory store** — шаблон самодостаточен без БД. Заменить на реальную БД при клонировании
+## Архитектура и тестирование
 
-## File map
+@./rules/architecture.md
 
-| Path                             | Purpose                                          |
-| -------------------------------- | ------------------------------------------------ |
-| `src/index.ts`                   | Hono app + @hono/node-server                     |
-| `src/config.ts`                  | Env config (PORT, AUTH_SERVER_URL, CORS_ORIGINS) |
-| `src/middleware/require-auth.ts` | JWT verification via JWKS                        |
-| `src/routes/health.ts`           | GET /health                                      |
-| `src/routes/example.ts`          | CRUD: GET/POST/PUT/DELETE /api/examples          |
-| `src/services/example.ts`        | Business logic — in-memory store                 |
-| `src/types/index.ts`             | TypeScript interfaces                            |
+## Команды и API
 
-## Common tasks
+@./rules/commands.md
 
-### Add a new API endpoint
+## Project-specific правила
 
-1. Create route handler in `src/routes/{feature}.ts`
-2. Create service in `src/services/{feature}.ts`
-3. Add types to `src/types/index.ts`
-4. Register route in `src/index.ts`
-5. Write unit test: `tests/unit/{feature}.test.ts`
-6. Write integration test: `tests/integration/{feature}.test.ts`
-7. Write E2E test: `tests/e2e/{feature}.spec.ts`
-
-### Replace in-memory store with a database
-
-1. Add database client (e.g., `@supabase/supabase-js`, `drizzle-orm`)
-2. Update `src/config.ts` with DB connection env vars
-3. Rewrite `src/services/example.ts` to use DB
-4. Update tests with appropriate mocks
-
-## Testing
-
-- **Unit:** isolated functions, mocks for jose
-- **Integration:** API endpoints with mocked auth middleware
-- **E2E:** Playwright request context (no browser needed)
-- **Coverage:** 100% required
-
-## Project-specific rules
-
-- Шаблон публичный — не содержит секретов и prod-конфигов
-- Не снижать порог coverage ниже 100%
+@./rules/project-rules.md
