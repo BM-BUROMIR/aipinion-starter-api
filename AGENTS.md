@@ -18,6 +18,10 @@ tracker: 'github:BM-BUROMIR/aipinion-starter-api'
 
 @./rules/commands.md
 
+## Docker / RU-зеркала
+
+@./rules/docker.md
+
 ## Project-specific правила
 
 @./rules/project-rules.md
