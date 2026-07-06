@@ -42,3 +42,6 @@ npm-debug.log*
 # Superpowers (plans, specs — local only)
 docs/superpowers/
 .superpowers/
+
+# oxi-task-runner state (mcp.json содержит секреты — не коммитить)
+.worktrees/
