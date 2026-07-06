@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    exclude: ['tests/e2e/**', 'node_modules/**'],
+    exclude: ['tests/e2e/**', 'node_modules/**', '.worktrees/**', '.task-runner/**'],
     coverage: {
       provider: 'v8',
       thresholds: {
@@ -11,7 +11,16 @@ export default defineConfig({
         functions: 100,
         lines: 100,
       },
-      exclude: ['tests/**', '**/*.config.*', 'dist/**', '**/*.d.ts', '**/types/**', 'src/index.ts'],
+      exclude: [
+        'tests/**',
+        '**/*.config.*',
+        'dist/**',
+        '**/*.d.ts',
+        '**/types/**',
+        'src/index.ts',
+        '.worktrees/**',
+        '.task-runner/**',
+      ],
     },
   },
 });
