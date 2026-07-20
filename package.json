@@ -7,8 +7,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch --env-file=.env src/index.ts",
-    "lint": "eslint src/ tests/",
-    "lint:fix": "eslint --fix src/ tests/",
+    "lint": "oxlint src/ tests/",
+    "lint:fix": "oxlint src/ tests/ --fix",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "build": "tsc",
@@ -25,22 +25,20 @@
     "jose": "^5.9.6"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.52.0",
     "@types/node": "^22.10.5",
     "@vitest/coverage-v8": "^4.0.18",
-    "eslint": "^10.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.0",
     "oxfmt": "^0.59.0",
+    "oxlint": "^1.74.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.56.1",
     "vitest": "^4.0.18"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
-      "eslint --fix",
+      "oxlint --fix",
       "oxfmt --no-error-on-unmatched-pattern"
     ],
     "*.{json,md,css}": [
